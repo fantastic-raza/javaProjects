@@ -1,47 +1,45 @@
+class library{
+    String[] books;
+    int NoOfBooks;
+   library(){
 
-import java.util.Scanner;
-
-class Library{
-    Scanner s =new Scanner(System.in);
-    int borrow;
-    int r;
-    int[] available={1,2,3,4,5};
-    int[]issued=new int[5];
-
-    public void availablebooks(){
-      for (int i=0; i<5; i++){
-          System.out.println("availablebooks"+available[i]);
-      }
+       NoOfBooks=0;
+       this.books= new String[100];
+   }
+    void addbook(String book){
+        this.books[NoOfBooks]=book;
+        NoOfBooks++;
+        System.out.println(book+" is added");
     }
-    public void borrowbook(){
-        borrow= s.nextInt();
-        available[borrow-1]=0;
-        issued[borrow-1]=borrow;
+    void availablebooks(){
+        System.out.println("available books");
+           for (String element : books) {
+                 if (element!=null) {
+                     System.out.println(element);
+                 }
+       }
     }
-    public void reurnbook(){
-        r= s.nextInt();
-        available[r-1]=r;
-        issued[r-1]=r;
+    void issuebook (String book){
+       for (int i=0; i< books.length; i++){
+           if (books[i].equals(book)){
+               System.out.println("book is issued");
+               books[i]=null;
+               return;
+           }
+       }
+        System.out.println("book not exist library");
     }
-   public void issuedbooks(){
-        for (int i=0; i<5; i++){
-            System.out.print("issuedbooks"+issued[i]);
-        }
-    }
-    Library(){
-        System.out.println("to see issued books press 1,");
-        System.out.println("for borrowing a book press 2,");
-        System.out.println("to see available boook press 3,");
-        System.out.println("to return a books press 4,");
-        System.out.println("to exit library press 5");
-
+    void returnbook(String book){
+       addbook(book);
     }
 }
 public class library_managment {
     public static void main(String[] args) {
-        Library ali = new Library();
-        Scanner sc = new Scanner(System.in);
-
-
+        library lb=new library();
+        lb.addbook("book1");
+        lb.addbook("book2");
+        lb.availablebooks();
+        lb.issuebook("book1");
+        lb.availablebooks();
     }
 }
